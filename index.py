@@ -8,7 +8,7 @@ cur=con.cursor()
 try:
     cur.execute('''create table project1 (sno int(4) primary key, name varchar(25), fname varchar(25),
 number int(10), grade int(2), section varchar(1))''')
-    cur.execute('''create table marks1 (sno int(4), pt1 int(3), pt2 int(3), hy int(3), final int(3), average int(3)''')
+    cur.execute('''create table marks1 (sno int(4), exam varchar(25), sub1 int(3), sub2 int(3), sub3 int(3), average int(3))''')
 except:
     pass
 print('''1. Insert 'n' records into the student table
@@ -33,12 +33,12 @@ elif choice==2:
         n=int(input("Enter number of records you'd like to enter: "))
         for j in range (n):
             sno=int(input("Enter SNO: "))
-            pt1=int(input("Enter overall percentage in PT1: "))
-            pt2=int(input("Enter overall percentage in PT2: "))
-            hy=int(input("Enter overaall percentage in half yearly: "))
-            final=int(input("Enter overall percentage in finals: "))
-            average=(pt1+pt2+hy+final)/4
-            query='''insert into marks1 values({},'{}','{}',{},{},'{}')'''.format(sno,pt1,pt2,hy,final,average)
+            exam=input("Enter Exam: ")
+            sub1=int(input("Enter exam percentage in sub1: "))
+            sub2=int(input("Enter exam percentage in sub2: "))
+            sub3=int(input("Enter exam percentage in sub3: "))
+            average=(sub1+sub2+sub3)/3
+            query='''insert into marks1 values({},'{}',{},{},{},{})'''.format(sno,exam,sub1,sub2,sub3,average)
             cur.execute(query)
         cur.execute("select * from marks1;")
         result=cur.fetchall()
