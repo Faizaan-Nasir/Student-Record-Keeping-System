@@ -1,5 +1,6 @@
 import mysql.connector as sql
-con=sql.connect(host="localhost",user='root',password='faizaan',database='faizaan')
+con=sql.connect(host="localhost",user='root',password='Abhinav@1176',database='faizaan')
+#con=sql.connect(host="localhost",user='root',password='faizaan',database='faizaan')
 if con.is_connected():
     pass
 else:
@@ -44,5 +45,34 @@ elif choice==2:
         result=cur.fetchall()
         for b in result:
             print(b)
+print("-----Student Management System-----")
+print('''0. Skip Menu
+1. Add a Student Record
+2. Deleting a Student Record
+3. Modifying Student Record
+4. Searching a record on the basis of S.No
+5. Searching a record on the basis of Name
+6. Searching a record on the basis of Grade
+7. Sorting records on the basis of Grade''')
+z=int(input("Enter your choice: "))
+ans="yes"
+while ans=="yes":
+    if z==0:
+        continue
+    elif z==1:
+        sno=int(input("Enter SNO: "))
+        name=input("Enter name: ")
+        fname=input("Enter father's name: ")
+        number=int(input("Enter mobile number: "))
+        grade=int(input("Enter grade: "))
+        section=input("Enter class: ")
+        query='''insert into project1 values({},'{}','{}',{},{},'{}')'''.format(sno,name,fname,number,grade,section)
+        cur.execute(query)
+        print("Option 1 executed successfully.")
+    elif z==2:
+        sno_1=int(input("Enter the S.No of the record you would like to delete: "))
+        cur.execute("delete from project1 where sno='"+sno_1+"';")
+        print("Option 2 executed successfully.")
+    ans=input("Do you wish to continue? Yes/No: ")
 con.commit()
 con.close()
