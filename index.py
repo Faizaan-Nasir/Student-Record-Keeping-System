@@ -120,5 +120,7 @@ while ans=="yes":
     ans=input("Do you wish to continue? Yes/No: ")
 cur.execute("select * from project1;")
 cur.execute("select * from marks1;")
+print("Thank you for using this software!")
+print("- Abhinav & Faizaan")
 con.commit()
 con.close()
