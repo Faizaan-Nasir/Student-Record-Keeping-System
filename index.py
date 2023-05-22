@@ -72,7 +72,53 @@ while ans=="yes":
     elif z==2:
         sno_1=int(input("Enter the S.No of the record you would like to delete: "))
         cur.execute("delete from project1 where sno='"+sno_1+"';")
-        print("Option 2 executed successfully.")
+        print("Option 2 executed successfully.")  
+    elif z==3:
+        rec_1=input("Enter the S.No of the record you would like to modify: ")
+        att_1=input("Enter the attribute you would like to modify: ")
+        cur.execute("update project1 set",att_1,"='"+att_1+"'where sno='"+sno+"';")
+        print("Option 3 executed successfully.")
+    elif z==4:
+        sno_2=int(input("Enter the S.No of the student you would like to search"))
+        try:
+            cur.execute("select * from project1 where sno= '"+sno_2+"';")
+            result=cur.fetchall
+            if result==1:
+                raise Exception("not allowed")
+        except:
+            for i in result:
+                print(i)
+        print("Option 4 executed successfully.")
+    elif z==5:
+        name_1=input("Enter the Name of the student you would like to search")
+        try:
+            cur.execute("select * from project1 where name= '"+name_1+"';")
+            result=cur.fetchall
+            if result!=null:
+                raise Exception("not allowed")
+        except:
+            for i in result:
+                print(i)
+        print("Option 5 executed successfully.")
+    elif z==6:
+        grade_1=input("Enter the Grade of the student you would like to search")
+        try:
+            cur.execute("select * from project1 where grade= '"+grade_1+"';")
+            result=cur.fetchall
+            if result!=null:
+                raise Exception("not allowed")
+        except:
+            for i in result:
+                print(i)
+        print("Option 6 executed successfully.")
+    elif z==7:
+        cur.execute("select * from project1 group by grade;")
+        result=cur.fetchall()
+        for i in result:
+            print(i)
+        print("Option 7 executed successfully.")
     ans=input("Do you wish to continue? Yes/No: ")
+cur.execute("select * from project1;")
+cur.execute("select * from marks1;")
 con.commit()
 con.close()
