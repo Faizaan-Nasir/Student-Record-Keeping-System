@@ -1,6 +1,13 @@
 import mysql.connector as sql
-con=sql.connect(host="localhost",user='root',password='Abhinav@1176',database='faizaan')
-#con=sql.connect(host="localhost",user='root',password='faizaan',database='faizaan')
+#con=sql.connect(host="localhost",user='root',password='Abhinav@1176',database='faizaan')
+con=sql.connect(host="localhost",user='root',password='faizaan',database='faizaan')
+def select(column,option):
+    cur.execute("select * from project1 where "+column+"="+option+";")
+    result=cur.fetchall()
+    for i in result:
+        print(i)
+    if len(result)==0:
+        print("No record matches your conditions.")
 if con.is_connected():
     pass
 else:
@@ -12,7 +19,8 @@ number int(10), grade int(2), section varchar(1))''')
     cur.execute('''create table marks1 (sno int(4), exam varchar(25), sub1 int(3), sub2 int(3), sub3 int(3), average int(3))''')
 except:
     pass
-print('''1. Insert 'n' records into the student table
+print('''0. Skip inserting new records
+1. Insert 'n' records into the student table
 2. Insert 'n' records into the marks table''')
 choice=int(input("Enter choice: "))
 if choice==1:
@@ -45,6 +53,7 @@ elif choice==2:
         result=cur.fetchall()
         for b in result:
             print(b)
+con.commit()
 print("-----Student Management System-----")
 print('''0. Skip Menu
 1. Add a Student Record
@@ -58,6 +67,7 @@ z=int(input("Enter your choice: "))
 ans="yes"
 while ans=="yes":
     if z==0:
+        ans='no'
         continue
     elif z==1:
         sno=int(input("Enter SNO: "))
@@ -79,48 +89,34 @@ while ans=="yes":
         cur.execute("update project1 set",att_1,"='"+att_1+"'where sno='"+sno+"';")
         print("Option 3 executed successfully.")
     elif z==4:
-        sno_2=int(input("Enter the S.No of the student you would like to search"))
-        try:
-            cur.execute("select * from project1 where sno= '"+sno_2+"';")
-            result=cur.fetchall
-            if result==1:
-                raise Exception("not allowed")
-        except:
-            for i in result:
-                print(i)
-        print("Option 4 executed successfully.")
+        sno_2=int(input("Enter the S.No of the student you would like to search: "))
+        select('sno',sno_2)
     elif z==5:
-        name_1=input("Enter the Name of the student you would like to search")
-        try:
-            cur.execute("select * from project1 where name= '"+name_1+"';")
-            result=cur.fetchall
-            if result!=null:
-                raise Exception("not allowed")
-        except:
-            for i in result:
-                print(i)
-        print("Option 5 executed successfully.")
+        name_1=input("Enter the Name of the student you would like to search: ")
+        name_1="'"+name_1+"'"
+        select('name',name_1)
     elif z==6:
-        grade_1=input("Enter the Grade of the student you would like to search")
-        try:
-            cur.execute("select * from project1 where grade= '"+grade_1+"';")
-            result=cur.fetchall
-            if result!=null:
-                raise Exception("not allowed")
-        except:
-            for i in result:
-                print(i)
-        print("Option 6 executed successfully.")
+        grade_1=input("Enter the Grade of the student you would like to search: ")
+        select('grade',grade_1)
     elif z==7:
         cur.execute("select * from project1 group by grade;")
         result=cur.fetchall()
         for i in result:
             print(i)
+        if len(result)==0:
+            print('No record matches your conditions.')
         print("Option 7 executed successfully.")
-    ans=input("Do you wish to continue? Yes/No: ")
+    ans=input("Do you wish to continue? yes/no: ")
 cur.execute("select * from project1;")
+result=cur.fetchall()
+print("----- TABLE 1 -----")
+for i in result:
+    print(i)
 cur.execute("select * from marks1;")
+result_1=cur.fetchall()
+print("----- TABLE 2 -----")
+for j in result_1:
+    print(j)
 print("Thank you for using this software!")
 print("- Abhinav & Faizaan")
-con.commit()
 con.close()
