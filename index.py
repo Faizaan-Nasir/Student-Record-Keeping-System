@@ -19,10 +19,14 @@ number int(10), grade int(2), section varchar(1))''')
     cur.execute('''create table marks1 (sno int(4), exam varchar(25), sub1 int(3), sub2 int(3), sub3 int(3), average int(3))''')
 except:
     pass
+print("--- Students versus Marks ---")
+print()
 print('''0. Skip inserting new records
 1. Insert 'n' records into the student table
 2. Insert 'n' records into the marks table''')
+print()
 choice=int(input("Enter choice: "))
+print()
 if choice==1:
     n=int(input("Enter number of records you'd like to enter: "))
     for i in range (n):
@@ -34,6 +38,9 @@ if choice==1:
         section=input("Enter class: ")
         query='''insert into project1 values({},'{}','{}',{},{},'{}')'''.format(sno,name,fname,number,grade,section)
         cur.execute(query)
+        print("----- This is the end of record number",i+1,"-----")
+        print()
+    print("Current records in the student table are as follows:")
     cur.execute("select * from project1;")
     result=cur.fetchall()
     for a in result:
@@ -49,11 +56,15 @@ elif choice==2:
             average=(sub1+sub2+sub3)/3
             query='''insert into marks1 values({},'{}',{},{},{},{})'''.format(sno,exam,sub1,sub2,sub3,average)
             cur.execute(query)
+            print("----- This is the end of record number",j+1,"-----")
+            print()
+        print("Current records in the marks table are as follows:")
         cur.execute("select * from marks1;")
         result=cur.fetchall()
         for b in result:
             print(b)
 con.commit()
+print()
 print("-----Student Management System-----")
 print('''0. Skip Menu
 1. Add a Student Record
@@ -63,6 +74,7 @@ print('''0. Skip Menu
 5. Searching a record on the basis of Name
 6. Searching a record on the basis of Grade
 7. Sorting records on the basis of Grade''')
+print()
 z=int(input("Enter your choice: "))
 ans="yes"
 while ans=="yes":
@@ -106,17 +118,21 @@ while ans=="yes":
         if len(result)==0:
             print('No record matches your conditions.')
         print("Option 7 executed successfully.")
+    print()
     ans=input("Do you wish to continue? yes/no: ")
 cur.execute("select * from project1;")
 result=cur.fetchall()
-print("----- TABLE 1 -----")
+print("----- Student Table Records -----")
 for i in result:
     print(i)
 cur.execute("select * from marks1;")
 result_1=cur.fetchall()
-print("----- TABLE 2 -----")
+print()
+print("----- Marks Table Records -----")
 for j in result_1:
     print(j)
+print()
+print()
 print("Thank you for using this software!")
 print("- Abhinav & Faizaan")
 con.close()
