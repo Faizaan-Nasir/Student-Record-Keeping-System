@@ -1,5 +1,5 @@
 import mysql.connector as sql
-con=sql.connect(host="localhost",user='root',password='ENTER YOUR SQL PASSWORD',database='ENTER THE DATABASE YOU WISH TO USE')
+con=sql.connect(host="localhost",user='root',password='ENTER YOUR DATABASE PWD',database='ENTER THE DATABASE YOU WOULD LIKE TO USE')
 
 #functions
 def select(table,column,option):
@@ -20,13 +20,13 @@ if con.is_connected():
 else:
     print("Try again")
 cur=con.cursor()
-try:
+print("--- Students versus Marks ---")
+time=input("Is this the first time you're running this program? (yes/no): ")
+if time=='yes':
     cur.execute('''create table project1 (sno int(4) primary key, name varchar(25), fname varchar(25),
 number int(10), grade int(2), section varchar(1))''')
     cur.execute('''create table marks1 (sno int(4), exam varchar(25), sub1 int(3), sub2 int(3), sub3 int(3), average int(3))''')
-except:
-    pass
-print("--- Students versus Marks ---")
+    print("Database created successfully")
 print()
 print('''0. Skip inserting new records
 1. Insert 'n' records into the student table
@@ -40,7 +40,7 @@ if choice==1:
         sno=int(input("Enter SNO: "))
         name=input("Enter name: ")
         fname=input("Enter father's name: ")
-        number=int(input("Enter mobile number: "))
+        number=int(input("Enter mobile number (10 digits, first digit must be 0): "))
         grade=int(input("Enter grade: "))
         section=input("Enter class: ")
         query='''insert into project1 values({},'{}','{}',{},{},'{}')'''.format(sno,name,fname,number,grade,section)
