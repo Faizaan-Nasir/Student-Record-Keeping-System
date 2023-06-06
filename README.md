@@ -11,4 +11,4 @@ This file requires the folowing:
 ## DISCLAIMER
 This project is purely a sample project with the intention to give a basic idea of the project expected by CBSE. The authors of this project are not directly associated with CBSE and advice against submitting this as your final project. 
 
-- - Abhinav and Faizaan
+### *- Abhinav and Faizaan*
