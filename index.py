@@ -25,7 +25,7 @@ time=input("Is this the first time you're running this program? (yes/no): ")
 if time=='yes':
     cur.execute('''create table project1 (sno int(4) primary key, name varchar(25), fname varchar(25),
 number int(10), grade int(2), section varchar(1))''')
-    cur.execute('''create table marks1 (sno int(4), exam varchar(25), sub1 int(3), sub2 int(3), sub3 int(3), average int(3))''')
+    cur.execute('''create table marks1 (sno int(4) references project1(sno), exam varchar(25), sub1 int(3), sub2 int(3), sub3 int(3), average int(3))''')
     print("Database created successfully")
 print()
 print('''0. Skip inserting new records
